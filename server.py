@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 # coding: utf-8
-
+import argparse
 import json
 
 from uuid import uuid4
@@ -54,5 +54,13 @@ def chain():
     }), 200
 
 
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", help="""The port to use""", default="5000")
+    parser.add_argument("-a", "--address", help="""The address to listen on""", default="0.0.0.0")
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    arg = parse_arguments()
+    app.run(host=arg.address, port=arg.port)
